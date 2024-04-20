@@ -405,6 +405,56 @@ myView.postDelayed({
 post와 postDelayed 메소드는 UI 관련 작업뿐만 아니라 사용자 인터랙션에 따라 동적으로 UI를 변경하거나, 애니메이션을 시작하는 등의 경우에도 유용하게 사용됩니다.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Android에서 Kotlin을 사용하여 프로그래밍 방식으로 TextView를 생성하고 설정하는 방법은 다음과 같습니다. 이 예제에서는 기본적인 TextView 생성 및 몇 가지 속성 설정 방법을 다룹니다.
+
+1. TextView 인스턴스 생성하기
+Activity의 onCreate 메소드 또는 Fragment의 onViewCreated 메소드 내에서 TextView 인스턴스를 생성할 수 있습니다.
+
+kotlin
+
+
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    
+    // TextView 인스턴스 생성
+    val myTextView = TextView(this)
+    
+    // TextView에 텍스트 설정
+    myTextView.text = "안녕하세요! Kotlin으로 생성된 TextView입니다."
+}
+2. TextView 속성 설정하기
+생성된 TextView 인스턴스에 대해 다양한 속성을 설정할 수 있습니다. 예를 들어, 텍스트 색상, 텍스트 크기, 레이아웃 속성 등을 설정할 수 있습니다.
+
+kotlin
+
+
+myTextView.apply {
+    // 텍스트 색상 설정
+    setTextColor(Color.BLUE)
+    
+    // 텍스트 크기 설정 (sp 단위 사용)
+    textSize = 20f
+    
+    // 레이아웃 파라미터 설정
+    val layoutParams = LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams.WRAP_CONTENT,
+        LinearLayout.LayoutParams.WRAP_CONTENT
+    )
+    this.layoutParams = layoutParams
+}
+3. TextView를 레이아웃에 추가하기
+마지막으로, 생성하고 설정한 TextView를 액티비티의 레이아웃에 추가해야 합니다. 이를 위해서는 먼저 레이아웃의 인스턴스를 가져온 다음, addView 메소드를 사용하여 TextView를 레이아웃에 추가합니다.
+
+kotlin
+
+
+// 레이아웃 인스턴스 가져오기 (예: LinearLayout)
+val myLayout: LinearLayout = findViewById(R.id.myLinearLayout)
+
+// TextView를 LinearLayout에 추가
+myLayout.addView(myTextView)
+이러한 단계를 통해 Kotlin 코드를 사용하여 Android 앱 내에서 TextView를 동적으로 생성하고 설정할 수 있습니다. 프로그래밍 방식으로 UI를 생성하는 것은 동적인 UI가 필요할 때 유용하며, 런타임에 UI를 조정해야 하는 경우에도 사용될 수 있습니다.
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

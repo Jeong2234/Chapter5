@@ -494,4 +494,47 @@ addView(View child, ViewGroup.LayoutParams params): 자식 뷰를 추가하고, 
 addView 기능을 통해 Android 앱에서 동적인 UI 구성이 가능해지며, 프로그래마틱하게 뷰를 관리할 수 있는 유연성을 제공합니다.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Android에서 ToneGenerator는 시스템 톤이나 DTMF(Dual Tone Multi-Frequency) 톤을 생성할 때 사용되는 클래스입니다. 이 클래스를 사용하면 다양한 종류의 표준 톤을 생성할 수 있으며, 주로 사용자 인터페이스 피드백, 알림 소리, 다이얼 톤 생성 등에 사용됩니다.
+
+ToneGenerator의 주요 기능
+톤 생성: 지정된 스트림 유형에 대해 특정 지속 시간 동안 톤을 재생합니다.
+볼륨 설정: 톤의 볼륨을 설정할 수 있습니다.
+톤 종료: 재생 중인 톤을 중지합니다.
+ToneGenerator 사용 방법
+ToneGenerator 인스턴스 생성
+
+ToneGenerator 객체는 생성자에서 스트림 유형(AudioManager.STREAM_MUSIC 등)과 볼륨을 지정하여 생성합니다. 볼륨은 0(무음)에서 ToneGenerator.MAX_VOLUME까지의 정수로 지정됩니다.
+
+kotlin
+
+
+val toneGen = ToneGenerator(AudioManager.STREAM_MUSIC, ToneGenerator.MAX_VOLUME)
+톤 생성 및 재생
+
+startTone(int toneType, int durationMs) 메소드를 사용하여 지정된 톤 타입을 지정된 시간(밀리초) 동안 재생합니다. toneType에는 ToneGenerator.TONE_DTMF_0, ToneGenerator.TONE_SUP_RINGTONE 등 다양한 톤 타입 상수를 지정할 수 있습니다.
+
+kotlin
+
+
+// DTMF '1' 톤을 200ms 동안 재생
+toneGen.startTone(ToneGenerator.TONE_DTMF_1, 200)
+톤 중지
+
+재생 중인 톤을 중지하려면 stopTone() 메소드를 호출합니다.
+
+kotlin
+
+
+toneGen.stopTone()
+리소스 해제
+
+ToneGenerator 사용이 끝나면 release() 메소드를 호출하여 관련 리소스를 해제합니다. 이는 메모리 누수를 방지하기 위해 중요합니다.
+
+kotlin
+
+
+toneGen.release()
+주의 사항
+ToneGenerator는 시스템 리소스를 사용하기 때문에, 더 이상 필요하지 않을 때는 반드시 release()를 호출하여 리소스를 해제해야 합니다.
+톤의 볼륨은 생성 시 지정한 스트림 유형에 따라 결정되므로, 전체 시스템 볼륨과 관련된 스트림의 볼륨 설정에 영향을 받을 수 있습니다.
+ToneGenerator를 사용함으로써 사용자 경험을 향상시키고, 앱 내에서 다양한 피드백 제공이 가능해집니다.
